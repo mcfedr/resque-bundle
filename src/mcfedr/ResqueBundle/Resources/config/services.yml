@@ -1,0 +1,14 @@
+parameters:
+    mcfedr_resque.host: ~
+    mcfedr_resque.port: ~
+
+services:
+    mcfedr_resque.manager:
+        class: mcfedr\ResqueBundle\Manager\ResqueManager
+        arguments:
+            - "%mcfedr_resque.host%"
+            - "%mcfedr_resque.port%"
+            -
+                'kernel.root_dir': '%kernel.root_dir%'
+                'kernel.environment': '%kernel.environment%'
+                'kernel.debug': '%kernel.debug%'
