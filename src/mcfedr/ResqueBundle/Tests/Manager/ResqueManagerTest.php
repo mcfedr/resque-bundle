@@ -45,8 +45,8 @@ class ResqueManagerTest extends WebTestCase
      */
     public function testDelete($name, $options, $queue, $priority, $when)
     {
-        $job = $this->manager->put($name, $options, $queue, $priority, new \DateTime($when));
-        $this->assertEquals(2, $this->manager->delete($job));
+        $job = $this->manager->put($name, $options, $queue, $priority, (new \DateTime($when))->add(new \DateInterval('P1M')));
+        $this->assertEquals(1, $this->manager->delete($job));
 
         $this->assertEquals(0, $this->manager->delete($job));
     }
