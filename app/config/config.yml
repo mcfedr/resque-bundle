@@ -29,3 +29,6 @@ twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
 
+mcfedr_resque:
+    host: 127.0.0.1
+    port: 6379

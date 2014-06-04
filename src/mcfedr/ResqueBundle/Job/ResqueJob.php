@@ -3,7 +3,6 @@
 
 namespace mcfedr\ResqueBundle\Job;
 
-
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -65,4 +64,4 @@ class ResqueJob
             $this->kernel->shutdown();
         }
     }
-} 
+}

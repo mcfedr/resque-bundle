@@ -18,7 +18,7 @@ class ResqueManager
      */
     public function __construct($host, $port, $kernelOptions)
     {
-        Resque::setBackend("$host:$port");
+        \Resque::setBackend("$host:$port");
         $this->kernelOptions = $kernelOptions;
     }
 
@@ -30,7 +30,7 @@ class ResqueManager
      * @param string $queue Optional queue name, otherwise the default queue will be used
      * @param int $priority
      * @param \DateTime $when Optionally set a time in the future when this task should happen
-     * @return Job
+     * @return JobDescription|null Only jobs queued in the future can be deleted
      */
     public function put($name, array $options = null, $queue = null, $priority = null, $when = null)
     {
@@ -45,20 +45,22 @@ class ResqueManager
 
         if ($when) {
             \ResqueScheduler::enqueueAt($when, $queue, static::JOB_CLASS, $args);
+            return new JobDescription($when, $queue, static::JOB_CLASS, $args);
         } else {
             \Resque::enqueue($queue, static::JOB_CLASS, $args);
+            return null;
         }
     }
 
     /**
      * Remove a job
      *
-     * @param $job
-     * @throws WrongJobException
-     * @throws NoSuchJobException
+     * @param JobDescription $job
+     * @return mixed
      */
-    public function delete(Job $job)
+    public function delete(JobDescription $job)
     {
-        $this->manager->delete($job);
+        return \ResqueScheduler::removeDelayedJobFromTimestamp($job->getWhen(), $job->getQueue(), $job->getClass(),
+            $job->getArgs());
     }
 } 
