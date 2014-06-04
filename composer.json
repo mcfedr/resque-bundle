@@ -2,7 +2,7 @@
     "name": "mcfedr/resque-bundle",
     "license": "MIT",
     "type": "symfony-bundle",
-    "description": "A bundle fo resque",
+    "description": "A bundle for resque",
     "autoload": {
         "psr-0": { "": "src/", "SymfonyStandard": "app/" }
     },
