@@ -2,6 +2,12 @@
 
 namespace mcfedr\ResqueBundle\Manager;
 
+/**
+ * Class JobDescription
+ * @package mcfedr\ResqueBundle\Manager
+ *
+ * Holds the parameters of a scheduled job
+ */
 class JobDescription
 {
     /**

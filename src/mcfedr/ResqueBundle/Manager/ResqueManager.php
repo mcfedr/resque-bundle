@@ -2,9 +2,16 @@
 
 namespace mcfedr\ResqueBundle\Manager;
 
+/**
+ * Class ResqueManager
+ * @package mcfedr\ResqueBundle\Manager
+ *
+ * The main class you will use, puts jobs on the queue
+ * Can also delete jobs
+ */
 class ResqueManager
 {
-    const JOB_CLASS = 'mcfedr\ResqueBundle\Job\ResqueJob';
+    const JOB_CLASS = 'mcfedr\ResqueBundle\Resque\Job';
 
     /**
      * @var array
@@ -12,21 +19,28 @@ class ResqueManager
     private $kernelOptions;
 
     /**
+     * @var string
+     */
+    private $defaultQueue;
+
+    /**
      * @param string $host
      * @param int $port
      * @param array $kernelOptions
+     * @param string $defaultQueue
      */
-    public function __construct($host, $port, $kernelOptions)
+    public function __construct($host, $port, $kernelOptions, $defaultQueue = 'default')
     {
         \Resque::setBackend("$host:$port");
         $this->kernelOptions = $kernelOptions;
+        $this->defaultQueue = $defaultQueue;
     }
 
     /**
      * Put a new job on a queue
      *
-     * @param string $name The name of the worker
-     * @param array $options Options to pass to execute - must be json_encode-able
+     * @param string $name The service name of the worker that implements {@link \mcfedr\ResqueBundle\Worker\WorkerInterface}
+     * @param array $options Options to pass to execute - must be serializable
      * @param string $queue Optional queue name, otherwise the default queue will be used
      * @param int $priority
      * @param \DateTime $when Optionally set a time in the future when this task should happen
@@ -35,7 +49,7 @@ class ResqueManager
     public function put($name, array $options = null, $queue = null, $priority = null, $when = null)
     {
         if (!$queue) {
-            $queue = 'default';
+            $queue = $this->defaultQueue;
         }
 
         $args = array_merge([

@@ -40,3 +40,5 @@ Your configuration should be something like this
     mcfedr_resque:
         host: 127.0.0.1
         port: 6379
+        default_queue: default
+

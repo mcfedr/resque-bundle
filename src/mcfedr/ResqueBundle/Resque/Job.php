@@ -1,13 +1,19 @@
 <?php
 
 
-namespace mcfedr\ResqueBundle\Job;
+namespace mcfedr\ResqueBundle\Resque;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-class ResqueJob
+/**
+ * Class ResqueJob
+ * @package mcfedr\ResqueBundle\Job
+ *
+ * This is the job that Resque will run, commands are then run within the symfony container
+ */
+class Job
 {
     public $args;
 

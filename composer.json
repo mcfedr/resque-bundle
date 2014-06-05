@@ -7,8 +7,8 @@
         "psr-0": { "mcfedr\\ResqueBundle": "src/" }
     },
     "require": {
-        "php": ">=5.5",
-        "symfony/symfony": "2.5.*",
+        "php": ">=5.4",
+        "symfony/symfony": "~2.3",
         "mcfedr/php-resque": "~1.3",
         "mcfedr/php-resque-scheduler": "~1.3"
     },
@@ -17,15 +17,5 @@
     },
     "config": {
         "bin-dir": "bin"
-    },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/mcfedr/php-resque.git"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/mcfedr/php-resque-scheduler.git"
-        }
-    ]
+    }
 }
