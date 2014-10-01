@@ -5,7 +5,7 @@ namespace mcfedr\ResqueBundle\Tests\Manager;
 use mcfedr\ResqueBundle\Manager\ResqueManager;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class ResqueManagerTest extends WebTestCase
+class ResqueManagerTest extends \PHPUnit_Framework_TestCase
 {
     /** @var ResqueManager */
     protected $manager;
@@ -17,7 +17,7 @@ class ResqueManagerTest extends WebTestCase
 
     public function testJobClass()
     {
-        $this->assertEquals('mcfedr\ResqueBundle\Job\ResqueJob', ResqueManager::JOB_CLASS);
+        $this->assertEquals('mcfedr\ResqueBundle\Resque\Job', ResqueManager::JOB_CLASS);
     }
 
     /**
@@ -30,6 +30,14 @@ class ResqueManagerTest extends WebTestCase
 
         $this->assertNull($this->manager->put($name));
         $this->assertInstanceOf('mcfedr\ResqueBundle\Manager\JobDescription', $value);
+    }
+
+    public function testRelativeKernel()
+    {
+        $this->manager->setKernelOptions([
+            'kernel.root_dir' => __DIR__
+        ]);
+        $this->assertEquals('../Tests/Manager/', $this->manager->getKernelOptions()['kernel.root_dir']);
     }
 
     public function getValues()
