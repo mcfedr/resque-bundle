@@ -9,8 +9,8 @@
     "require": {
         "php": ">=5.4",
         "symfony/symfony": "~2.3",
-        "chrisboulton/php-resque": "dev-master",
-        "chrisboulton/php-resque-scheduler": "dev-master"
+        "chrisboulton/php-resque": "dev-master as 1.3",
+        "chrisboulton/php-resque-scheduler": "dev-master as 1.3"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.1"
