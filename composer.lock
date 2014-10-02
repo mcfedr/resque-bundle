@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7058807fab7f5f1132a48290d479b489",
+    "hash": "6bd4f5764bbe7fc3335eb0018eaa03a7",
     "packages": [
         {
             "name": "chrisboulton/php-resque",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/chrisboulton/php-resque.git",
-                "reference": "c335bc3"
+                "reference": "c335bc35558e0683f95c3fd5dd11a5817c0a761f"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/chrisboulton/php-resque/zipball/c335bc35558e0683f95c3fd5dd11a5817c0a761f",
-                "reference": "c335bc3",
+                "reference": "c335bc35558e0683f95c3fd5dd11a5817c0a761f",
                 "shasum": ""
             },
             "require": {
@@ -68,12 +68,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/chrisboulton/php-resque-scheduler.git",
-                "reference": "ab8bd52"
+                "reference": "ab8bd52949cac1f815bbb97aa39f51c7b5766a86"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/chrisboulton/php-resque-scheduler/zipball/ab8bd52949cac1f815bbb97aa39f51c7b5766a86",
-                "reference": "ab8bd52",
+                "reference": "ab8bd52949cac1f815bbb97aa39f51c7b5766a86",
                 "shasum": ""
             },
             "require": {
