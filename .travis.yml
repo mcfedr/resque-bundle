@@ -7,5 +7,5 @@ php:
 
 before_script:
     - composer selfupdate
-    - composer install
+    - composer install --prefer-source
 script: ./vendor/bin/phpunit
