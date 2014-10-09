@@ -43,3 +43,7 @@ Your configuration should be something like this
         port: 6379
         default_queue: default
 
+## Tests
+
+    ./vendor/bin/phpunit
+    
