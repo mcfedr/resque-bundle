@@ -4,7 +4,7 @@ A bundle for managing jobs with php-resque
 
 [![Latest Stable Version](https://poser.pugx.org/mcfedr/resque-bundle/v/stable.png)](https://packagist.org/packages/mcfedr/resque-bundle)
 [![License](https://poser.pugx.org/mcfedr/resque-bundle/license.png)](https://packagist.org/packages/mcfedr/resque-bundle)
-[![Build Status](https://travis-ci.org/mcfedr/json-form.svg?branch=master)](https://travis-ci.org/mcfedr/json-form)
+[![Build Status](https://travis-ci.org/mcfedr/resque-bundle.svg?branch=master)](https://travis-ci.org/mcfedr/resque-bundle)
 
 ## Requirements
 
