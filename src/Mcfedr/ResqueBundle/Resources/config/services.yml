@@ -5,7 +5,7 @@ parameters:
 
 services:
     mcfedr_resque.manager:
-        class: mcfedr\ResqueBundle\Manager\ResqueManager
+        class: Mcfedr\ResqueBundle\Manager\ResqueManager
         arguments:
             - "%mcfedr_resque.host%"
             - "%mcfedr_resque.port%"

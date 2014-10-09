@@ -1,7 +1,7 @@
 <?php
 
 
-namespace mcfedr\ResqueBundle\Resque;
+namespace Mcfedr\ResqueBundle\Resque;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Finder\Finder;
@@ -9,7 +9,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
  * Class ResqueJob
- * @package mcfedr\ResqueBundle\Job
+ * @package Mcfedr\ResqueBundle\Job
  *
  * This is the job that Resque will run, commands are then run within the symfony container
  */

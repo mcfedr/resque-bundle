@@ -1,7 +1,7 @@
 <?php
 
 
-namespace mcfedr\ResqueBundle\Worker;
+namespace Mcfedr\ResqueBundle\Worker;
 
 
 interface WorkerInterface
@@ -13,4 +13,4 @@ interface WorkerInterface
      * @throws \Exception
      */
     public function execute(array $options = null);
-} 
+}

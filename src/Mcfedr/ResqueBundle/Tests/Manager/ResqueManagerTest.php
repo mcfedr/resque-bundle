@@ -1,8 +1,8 @@
 <?php
 
-namespace mcfedr\ResqueBundle\Tests\Manager;
+namespace Mcfedr\ResqueBundle\Tests\Manager;
 
-use mcfedr\ResqueBundle\Manager\ResqueManager;
+use Mcfedr\ResqueBundle\Manager\ResqueManager;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class ResqueManagerTest extends \PHPUnit_Framework_TestCase
@@ -17,7 +17,7 @@ class ResqueManagerTest extends \PHPUnit_Framework_TestCase
 
     public function testJobClass()
     {
-        $this->assertEquals('mcfedr\ResqueBundle\Resque\Job', ResqueManager::JOB_CLASS);
+        $this->assertEquals('Mcfedr\ResqueBundle\Resque\Job', ResqueManager::JOB_CLASS);
     }
 
     /**
@@ -25,11 +25,11 @@ class ResqueManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testPut($name, $options, $queue, $priority, $when)
     {
-        $this->assertInstanceOf('mcfedr\ResqueBundle\Manager\ResqueManager', $this->manager);
+        $this->assertInstanceOf('Mcfedr\ResqueBundle\Manager\ResqueManager', $this->manager);
         $value = $this->manager->put($name, $options, $queue, $priority, new \DateTime($when));
 
         $this->assertNull($this->manager->put($name));
-        $this->assertInstanceOf('mcfedr\ResqueBundle\Manager\JobDescription', $value);
+        $this->assertInstanceOf('Mcfedr\ResqueBundle\Manager\JobDescription', $value);
     }
 
     public function testRelativeKernel()

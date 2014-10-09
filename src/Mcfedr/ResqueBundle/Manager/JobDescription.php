@@ -1,10 +1,10 @@
 <?php
 
-namespace mcfedr\ResqueBundle\Manager;
+namespace Mcfedr\ResqueBundle\Manager;
 
 /**
  * Class JobDescription
- * @package mcfedr\ResqueBundle\Manager
+ * @package Mcfedr\ResqueBundle\Manager
  *
  * Holds the parameters of a scheduled job
  */

@@ -1,19 +1,19 @@
 <?php
 
-namespace mcfedr\ResqueBundle\Manager;
+namespace Mcfedr\ResqueBundle\Manager;
 
 use Symfony\Component\Routing\Generator\UrlGenerator;
 
 /**
  * Class ResqueManager
- * @package mcfedr\ResqueBundle\Manager
+ * @package Mcfedr\ResqueBundle\Manager
  *
  * The main class you will use, puts jobs on the queue
  * Can also delete jobs
  */
 class ResqueManager
 {
-    const JOB_CLASS = 'mcfedr\ResqueBundle\Resque\Job';
+    const JOB_CLASS = 'Mcfedr\ResqueBundle\Resque\Job';
 
     /**
      * @var array
@@ -62,7 +62,7 @@ class ResqueManager
     /**
      * Put a new job on a queue
      *
-     * @param string $name The service name of the worker that implements {@link \mcfedr\ResqueBundle\Worker\WorkerInterface}
+     * @param string $name The service name of the worker that implements {@link \Mcfedr\ResqueBundle\Worker\WorkerInterface}
      * @param array $options Options to pass to execute - must be serializable
      * @param string $queue Optional queue name, otherwise the default queue will be used
      * @param int $priority
@@ -133,4 +133,4 @@ class ResqueManager
         }
         return implode('/', $relPath);
     }
-} 
+}

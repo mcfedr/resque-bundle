@@ -1,6 +1,6 @@
 <?php
 
-namespace mcfedr\ResqueBundle\DependencyInjection;
+namespace Mcfedr\ResqueBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
