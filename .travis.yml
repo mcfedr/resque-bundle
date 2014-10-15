@@ -5,7 +5,11 @@ php:
     - 5.4
     - hhvm
 
+services:
+    - redis-server
+
 before_script:
     - composer selfupdate
     - composer install --prefer-source
+
 script: ./vendor/bin/phpunit
