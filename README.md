@@ -32,7 +32,7 @@ Include the bundle in your AppKernel
     {
         $bundles = array(
             ...
-            new mcfedr\ResqueBundle\mcfedrResqueBundle(),
+            new Mcfedr\ResqueBundle\McfedrResqueBundle(),
 
 ### Configuration
 
