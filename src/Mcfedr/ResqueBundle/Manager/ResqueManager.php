@@ -39,10 +39,12 @@ class ResqueManager
      */
     public function __construct($host, $port, $kernelOptions, $defaultQueue = 'default', $debug = false)
     {
-        \Resque::setBackend("$host:$port");
         $this->defaultQueue = $defaultQueue;
         $this->setKernelOptions($kernelOptions);
         $this->debug = $debug;
+        if (!$debug) {
+            \Resque::setBackend("$host:$port");
+        }
     }
 
     /**
@@ -78,7 +80,7 @@ class ResqueManager
      */
     public function put($name, array $options = null, $queue = null, $priority = null, $when = null)
     {
-        if (!$this->debug) {
+        if ($this->debug) {
             return;
         }
 
@@ -108,7 +110,7 @@ class ResqueManager
      */
     public function delete(JobDescription $job)
     {
-        if (!$this->debug) {
+        if ($this->debug) {
             return 0;
         }
 
