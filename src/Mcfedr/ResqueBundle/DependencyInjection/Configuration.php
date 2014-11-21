@@ -20,6 +20,7 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('mcfedr_resque')
             ->children()
+                ->booleanNode('debug')->defaultFalse()->end()
                 ->scalarNode('host')->defaultValue('localhost')->cannotBeEmpty()->end()
                 ->integerNode('port')->min(0)->max(65535)->defaultValue(6379)->end()
                 ->scalarNode('default_queue')->defaultValue('default')->cannotBeEmpty()->end()

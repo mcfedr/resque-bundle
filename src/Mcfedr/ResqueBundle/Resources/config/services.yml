@@ -2,6 +2,7 @@ parameters:
     mcfedr_resque.host: ~
     mcfedr_resque.port: ~
     mcfedr_resque.default_queue: ~
+    mcfedr_resque.debug: ~
 
 services:
     mcfedr_resque.manager:
@@ -14,3 +15,4 @@ services:
                 'kernel.environment': '%kernel.environment%'
                 'kernel.debug': '%kernel.debug%'
             - "%mcfedr_resque.default_queue%"
+            - "%mcfedr_resque.debug%"

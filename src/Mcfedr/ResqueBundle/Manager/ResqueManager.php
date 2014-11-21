@@ -26,16 +26,23 @@ class ResqueManager
     private $defaultQueue;
 
     /**
+     * @var bool
+     */
+    private $debug;
+
+    /**
      * @param string $host
      * @param int $port
      * @param array $kernelOptions
      * @param string $defaultQueue
+     * @param bool $debug
      */
-    public function __construct($host, $port, $kernelOptions, $defaultQueue = 'default')
+    public function __construct($host, $port, $kernelOptions, $defaultQueue = 'default', $debug = false)
     {
         \Resque::setBackend("$host:$port");
         $this->defaultQueue = $defaultQueue;
         $this->setKernelOptions($kernelOptions);
+        $this->debug = $debug;
     }
 
     /**
@@ -71,6 +78,10 @@ class ResqueManager
      */
     public function put($name, array $options = null, $queue = null, $priority = null, $when = null)
     {
+        if (!$this->debug) {
+            return;
+        }
+
         if (!$queue) {
             $queue = $this->defaultQueue;
         }
@@ -93,10 +104,14 @@ class ResqueManager
      * Remove a job
      *
      * @param JobDescription $job
-     * @return mixed
+     * @return int number of deleted jobs
      */
     public function delete(JobDescription $job)
     {
+        if (!$this->debug) {
+            return 0;
+        }
+
         return \ResqueScheduler::removeDelayedJobFromTimestamp($job->getWhen(), $job->getQueue(), $job->getClass(),
             $job->getArgs());
     }
