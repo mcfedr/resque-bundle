@@ -23,10 +23,10 @@ class ResqueManagerTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getValues
      */
-    public function testPut($name, $options, $queue, $priority, $when)
+    public function testPut($name, $options, $queue, $when)
     {
         $this->assertInstanceOf('Mcfedr\ResqueBundle\Manager\ResqueManager', $this->manager);
-        $value = $this->manager->put($name, $options, $queue, $priority, new \DateTime($when));
+        $value = $this->manager->put($name, $options, $queue, new \DateTime($when));
 
         $this->assertNull($this->manager->put($name));
         $this->assertInstanceOf('Mcfedr\ResqueBundle\Manager\JobDescription', $value);
@@ -37,25 +37,26 @@ class ResqueManagerTest extends \PHPUnit_Framework_TestCase
         $this->manager->setKernelOptions([
             'kernel.root_dir' => __DIR__
         ]);
-        $this->assertEquals('../Tests/Manager/', $this->manager->getKernelOptions()['kernel.root_dir']);
-    }
 
-    public function getValues()
-    {
-        return [
-            ['test', null, null, null, 'next TUE 11:00'],
-            ['test1', [], null, null, 'next WED 21:00']
-        ];
+        $this->assertEquals('../../../../tests/Mcfedr/ResqueBundle/Tests/Manager/', $this->manager->getKernelOptions()['kernel.root_dir']);
     }
 
     /**
      * @dataProvider getValues
      */
-    public function testDelete($name, $options, $queue, $priority, $when)
+    public function testDelete($name, $options, $queue, $when)
     {
-        $job = $this->manager->put($name, $options, $queue, $priority, (new \DateTime($when))->add(new \DateInterval('P1M')));
+        $job = $this->manager->put($name, $options, $queue, (new \DateTime($when))->add(new \DateInterval('P1M')));
         $this->assertEquals(1, $this->manager->delete($job));
 
         $this->assertEquals(0, $this->manager->delete($job));
+    }
+
+    public function getValues()
+    {
+        return [
+            ['test', null, null, 'next TUE 11:00'],
+            ['test1', [], null, 'next WED 21:00']
+        ];
     }
 }

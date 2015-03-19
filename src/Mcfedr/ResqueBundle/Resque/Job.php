@@ -46,6 +46,8 @@ class Job
     }
 
     /**
+     * This is largely copied from how the test client finds and setups a kernel
+     *
      * @return KernelInterface
      */
     protected function createKernel()

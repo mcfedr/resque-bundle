@@ -4,7 +4,10 @@
     "type": "symfony-bundle",
     "description": "A bundle for resque",
     "autoload": {
-        "psr-0": { "Mcfedr\\ResqueBundle": "src/" }
+        "psr-4": { "Mcfedr\\ResqueBundle\\": "src/Mcfedr/ResqueBundle/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Mcfedr\\ResqueBundle\\" : "tests/Mcfedr/ResqueBundle/" }
     },
     "require": {
         "php": ">=5.4",

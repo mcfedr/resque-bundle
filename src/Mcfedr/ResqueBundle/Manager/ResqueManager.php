@@ -2,8 +2,6 @@
 
 namespace Mcfedr\ResqueBundle\Manager;
 
-use Symfony\Component\Routing\Generator\UrlGenerator;
-
 /**
  * Class ResqueManager
  * @package Mcfedr\ResqueBundle\Manager
@@ -35,7 +33,7 @@ class ResqueManager
      * @param int $port
      * @param array $kernelOptions
      * @param string $defaultQueue
-     * @param bool $debug
+     * @param bool $debug if debug is true then no calls to Resque will be made
      */
     public function __construct($host, $port, $kernelOptions, $defaultQueue = 'default', $debug = false)
     {
@@ -62,6 +60,8 @@ class ResqueManager
     public function setKernelOptions($kernelOptions)
     {
         $this->kernelOptions = $kernelOptions;
+
+        //Convert root_dir to be relative to the resque bundle paths, this makes it possible to deploy workers in different places
         if (array_key_exists('kernel.root_dir', $this->kernelOptions)) {
             $this->kernelOptions['kernel.root_dir'] = $this->getRelativePath(__DIR__, $this->kernelOptions['kernel.root_dir']);
         }
@@ -72,13 +72,12 @@ class ResqueManager
      * Put a new job on a queue
      *
      * @param string $name The service name of the worker that implements {@link \Mcfedr\ResqueBundle\Worker\WorkerInterface}
-     * @param array $options Options to pass to execute - must be serializable
+     * @param array $options Options to pass to execute - must be json serializable
      * @param string $queue Optional queue name, otherwise the default queue will be used
-     * @param int $priority
      * @param \DateTime $when Optionally set a time in the future when this task should happen
      * @return JobDescription|null Only jobs queued in the future can be deleted
      */
-    public function put($name, array $options = null, $queue = null, $priority = null, $when = null)
+    public function put($name, array $options = null, $queue = null, \DateTime $when = null)
     {
         if ($this->debug) {
             return;
