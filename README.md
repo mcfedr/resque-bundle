@@ -5,6 +5,7 @@ A bundle for managing jobs with php-resque
 [![Latest Stable Version](https://poser.pugx.org/mcfedr/resque-bundle/v/stable.png)](https://packagist.org/packages/mcfedr/resque-bundle)
 [![License](https://poser.pugx.org/mcfedr/resque-bundle/license.png)](https://packagist.org/packages/mcfedr/resque-bundle)
 [![Build Status](https://travis-ci.org/mcfedr/resque-bundle.svg?branch=master)](https://travis-ci.org/mcfedr/resque-bundle)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/22b1fb48-5b0d-4737-8022-4ac0759d5537/mini.png)](https://insight.sensiolabs.com/projects/22b1fb48-5b0d-4737-8022-4ac0759d5537)
 
 ## Requirements
 
