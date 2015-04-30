@@ -16,12 +16,6 @@
         "mcfedr/php-resque-scheduler": "~1.3"
     },
     "require-dev": {
-        "phpunit/phpunit": "~4.1",
-        "theseer/phpdox": "~0.7",
-        "phploc/phploc": "~2.0",
-        "pdepend/pdepend": "~2.0",
-        "phpmd/phpmd": "~2.1",
-        "squizlabs/php_codesniffer": "~1.5",
-        "sebastian/phpcpd": "~2.0"
+        "phpunit/phpunit": "~4.1"
     }
 }
