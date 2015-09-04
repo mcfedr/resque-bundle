@@ -29,5 +29,8 @@ class McfedrResqueExtension extends Extension
         $container->setParameter('mcfedr_resque.port', $config['port']);
         $container->setParameter('mcfedr_resque.default_queue', $config['default_queue']);
         $container->setParameter('mcfedr_resque.debug', $config['debug']);
+        if (array_key_exists('prefix', $config)) {
+            $container->setParameter('mcfedr_resque.prefix', $config['prefix']);
+        }
     }
 }

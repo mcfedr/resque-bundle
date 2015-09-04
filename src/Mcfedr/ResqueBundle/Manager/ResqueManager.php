@@ -35,13 +35,16 @@ class ResqueManager
      * @param string $defaultQueue
      * @param bool $debug if debug is true then no calls to Resque will be made
      */
-    public function __construct($host, $port, $kernelOptions, $defaultQueue = 'default', $debug = false)
+    public function __construct($host, $port, $kernelOptions, $defaultQueue = 'default', $prefix = null, $debug = false)
     {
         $this->defaultQueue = $defaultQueue;
         $this->setKernelOptions($kernelOptions);
         $this->debug = $debug;
         if (!$debug) {
             \Resque::setBackend("$host:$port");
+            if ($prefix) {
+                \Resque_Redis::prefix($prefix);
+            }
         }
     }
 

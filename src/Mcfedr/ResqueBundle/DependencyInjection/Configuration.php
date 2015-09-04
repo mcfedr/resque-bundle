@@ -24,6 +24,7 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('host')->defaultValue('localhost')->cannotBeEmpty()->end()
                 ->integerNode('port')->min(0)->max(65535)->defaultValue(6379)->end()
                 ->scalarNode('default_queue')->defaultValue('default')->cannotBeEmpty()->end()
+                ->scalarNode('prefix')->end()
             ->end()
         ->end();
 
