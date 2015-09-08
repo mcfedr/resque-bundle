@@ -43,7 +43,7 @@ Your configuration should be something like this
         host: 127.0.0.1
         port: 6379
         default_queue: default
-        prefix: my_app
+        prefix: 'my_app:'
 
 ## Usage
 
@@ -51,11 +51,11 @@ Your configuration should be something like this
 1. Use `mcfedr_resque.manager` to put tasks into the queue
 1. Run the resque worker 
     
-    `VVERBOSE=1 QUEUE=default APP_INCLUDE=app/bootstrap.php.cache PREFIX=my_app REDIS_BACKEND=127.0.0.1:6379 ./bin/resque`
+    `VVERBOSE=1 QUEUE=default APP_INCLUDE=app/bootstrap.php.cache PREFIX="my_app:" REDIS_BACKEND=127.0.0.1:6379 ./bin/resque`
     
 1. And optionally the scheduler
 
-      `VVERBOSE=1 PREFIX=my_app REDIS_BACKEND=127.0.0.1:6379 ./bin/resque-scheduler`
+      `VVERBOSE=1 PREFIX="my_app:" REDIS_BACKEND=127.0.0.1:6379 ./bin/resque-scheduler`
 
 ## Tests
 
