@@ -86,7 +86,7 @@ class ResqueManager
      * @param string $queue Optional queue name, otherwise the default queue will be used
      * @param \DateTime $when Optionally set a time in the future when this task should happen
      * @param boolean $trackStatus Set to true to be able to monitor the status of a job
-     * @return JobDescription|null Only jobs queued in the future can be deleted
+     * @return JobDescription
      */
     public function put($name, array $options = null, $queue = null, \DateTime $when = null, $trackStatus = false)
     {
@@ -109,8 +109,8 @@ class ResqueManager
             \ResqueScheduler::enqueueAt($when, $queue, static::JOB_CLASS, $args, $trackJobStatus);
             return new JobDescription($when, $queue, static::JOB_CLASS, $args, $trackJobStatus);
         } else {
-            \Resque::enqueue($queue, static::JOB_CLASS, $args, $trackJobStatus);
-            return null;
+            $id = \Resque::enqueue($queue, static::JOB_CLASS, $args, $trackJobStatus);
+            return new JobDescription(null, $queue, static::JOB_CLASS, $args, $trackJobStatus, $id);
         }
     }
 
@@ -123,6 +123,10 @@ class ResqueManager
     public function delete(JobDescription $job)
     {
         if ($this->debug) {
+            return 0;
+        }
+
+        if (!$job->isFutureJob()) {
             return 0;
         }
 

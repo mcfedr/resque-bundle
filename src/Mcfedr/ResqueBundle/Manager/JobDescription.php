@@ -11,6 +11,11 @@ namespace Mcfedr\ResqueBundle\Manager;
 class JobDescription
 {
     /**
+     * @var string
+     */
+    private $id;
+
+    /**
      * @var \DateTime
      */
     private $when;
@@ -35,21 +40,14 @@ class JobDescription
      */
     private $trackStatus;
 
-    public function __construct($when, $queue, $class, $args, $trackStatus = false)
+    public function __construct($when, $queue, $class, $args, $trackStatus = false, $id = null)
     {
         $this->args = $args;
         $this->class = $class;
         $this->queue = $queue;
         $this->when = $when;
         $this->trackStatus = $trackStatus;
-    }
-
-    /**
-     * @param array $args
-     */
-    public function setArgs($args)
-    {
-        $this->args = $args;
+        $this->id = $id;
     }
 
     /**
@@ -61,14 +59,6 @@ class JobDescription
     }
 
     /**
-     * @param string $class
-     */
-    public function setClass($class)
-    {
-        $this->class = $class;
-    }
-
-    /**
      * @return string
      */
     public function getClass()
@@ -77,27 +67,11 @@ class JobDescription
     }
 
     /**
-     * @param string $queue
-     */
-    public function setQueue($queue)
-    {
-        $this->queue = $queue;
-    }
-
-    /**
      * @return string
      */
     public function getQueue()
     {
         return $this->queue;
-    }
-
-    /**
-     * @param \DateTime $when
-     */
-    public function setWhen($when)
-    {
-        $this->when = $when;
     }
 
     /**
@@ -117,12 +91,15 @@ class JobDescription
     }
 
     /**
-     * @param boolean $trackStatus
-     * @return JobDescription
+     * @return string
      */
-    public function setTrackStatus($trackStatus)
+    public function getId()
     {
-        $this->trackStatus = $trackStatus;
-        return $this;
+        return $this->id;
+    }
+
+    public function isFutureJob()
+    {
+        return !!$this->getWhen();
     }
 }

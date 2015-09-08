@@ -27,6 +27,8 @@ class ResqueManagerTest extends \PHPUnit_Framework_TestCase
     {
         $value = $this->manager->put($name, $options, $queue, new \DateTime($when));
         $this->assertInstanceOf('Mcfedr\ResqueBundle\Manager\JobDescription', $value);
+        $this->assertTrue($value->isFutureJob());
+        $this->assertNull($value->getId());
     }
 
     /**
@@ -34,7 +36,10 @@ class ResqueManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testPutNow($name, $options, $queue, $when)
     {
-        $this->assertNull($this->manager->put($name, $options, $queue));
+        $value = $this->manager->put($name, $options, $queue);
+        $this->assertInstanceOf('Mcfedr\ResqueBundle\Manager\JobDescription', $value);
+        $this->assertFalse($value->isFutureJob());
+        $this->assertInternalType('string', $value->getId());
     }
 
     public function testRelativeKernel()
@@ -54,6 +59,15 @@ class ResqueManagerTest extends \PHPUnit_Framework_TestCase
         $job = $this->manager->put($name, $options, $queue, (new \DateTime($when))->add(new \DateInterval('P1M')));
         $this->assertEquals(1, $this->manager->delete($job));
 
+        $this->assertEquals(0, $this->manager->delete($job));
+    }
+
+    /**
+     * @dataProvider getValues
+     */
+    public function testDeleteNow($name, $options, $queue, $when)
+    {
+        $job = $this->manager->put($name, $options, $queue);
         $this->assertEquals(0, $this->manager->delete($job));
     }
 
