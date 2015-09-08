@@ -12,7 +12,7 @@ class ResqueManagerTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->manager = new ResqueManager('127.0.0.1', 6379, []);
+        $this->manager = new ResqueManager('127.0.0.1', 6379, [], 'default', 'tests:', false, false);
     }
 
     public function testJobClass()
@@ -23,13 +23,18 @@ class ResqueManagerTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getValues
      */
-    public function testPut($name, $options, $queue, $when)
+    public function testPutFuture($name, $options, $queue, $when)
     {
-        $this->assertInstanceOf('Mcfedr\ResqueBundle\Manager\ResqueManager', $this->manager);
         $value = $this->manager->put($name, $options, $queue, new \DateTime($when));
-
-        $this->assertNull($this->manager->put($name));
         $this->assertInstanceOf('Mcfedr\ResqueBundle\Manager\JobDescription', $value);
+    }
+
+    /**
+     * @dataProvider getValues
+     */
+    public function testPutNow($name, $options, $queue, $when)
+    {
+        $this->assertNull($this->manager->put($name, $options, $queue));
     }
 
     public function testRelativeKernel()

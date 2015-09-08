@@ -41,7 +41,7 @@ class ResqueManager
      * @param bool $debug if debug is true then no calls to Resque will be made
      * @param boolean $trackStatus Set to true to be able to monitor the status of jobs
      */
-    public function __construct($host, $port, $kernelOptions, $defaultQueue = 'default', $prefix, $debug, $trackStatus)
+    public function __construct($host, $port, $kernelOptions, $defaultQueue, $prefix, $debug, $trackStatus)
     {
         $this->defaultQueue = $defaultQueue;
         $this->setKernelOptions($kernelOptions);
