@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ad0e1914f8b21a3be7d2ee0f95a91efe",
+    "hash": "49a1db8738e48af0525abf301b180551",
     "packages": [
         {
             "name": "colinmollenhour/credis",
