@@ -30,12 +30,18 @@ class JobDescription
      */
     private $args;
 
-    function __construct($when, $queue, $class, $args)
+    /**
+     * @var boolean
+     */
+    private $trackStatus;
+
+    public function __construct($when, $queue, $class, $args, $trackStatus = false)
     {
         $this->args = $args;
         $this->class = $class;
         $this->queue = $queue;
         $this->when = $when;
+        $this->trackStatus = $trackStatus;
     }
 
     /**
@@ -100,5 +106,23 @@ class JobDescription
     public function getWhen()
     {
         return $this->when;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getTrackStatus()
+    {
+        return $this->trackStatus;
+    }
+
+    /**
+     * @param boolean $trackStatus
+     * @return JobDescription
+     */
+    public function setTrackStatus($trackStatus)
+    {
+        $this->trackStatus = $trackStatus;
+        return $this;
     }
 }

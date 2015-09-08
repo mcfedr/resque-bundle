@@ -44,6 +44,16 @@ Your configuration should be something like this
         port: 6379
         default_queue: default
         prefix: 'my_app:'
+        
+#### Options
+
+* `host` - The redis host name
+* `port` - The redis port
+* `prefix` - The prefix for resque keys in redis - Use this when multiple resque instances are running in a single
+redis host to separate them completely
+* `default_queue` - Name of queue to use if not specified
+* `debug` - If set to true no calls to Resque will actually be made
+* `trackStatus` - Set to true to enable job tracking for all jobs
 
 ## Usage
 

@@ -32,5 +32,6 @@ class McfedrResqueExtension extends Extension
         if (array_key_exists('prefix', $config)) {
             $container->setParameter('mcfedr_resque.prefix', $config['prefix']);
         }
+        $container->setParameter('mcfedr_resque.track_status', $config['track_status']);
     }
 }

@@ -25,6 +25,7 @@ class Configuration implements ConfigurationInterface
                 ->integerNode('port')->min(0)->max(65535)->defaultValue(6379)->end()
                 ->scalarNode('default_queue')->defaultValue('default')->cannotBeEmpty()->end()
                 ->scalarNode('prefix')->end()
+                ->booleanNode('track_status')->defaultFalse()->end()
             ->end()
         ->end();
 

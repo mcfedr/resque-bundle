@@ -3,6 +3,7 @@ parameters:
     mcfedr_resque.port: ~
     mcfedr_resque.default_queue: ~
     mcfedr_resque.debug: ~
+    mcfedr_resque.track_status: ~
     mcfedr_resque.prefix: ~
 
 services:
@@ -18,3 +19,4 @@ services:
             - "%mcfedr_resque.default_queue%"
             - "%mcfedr_resque.prefix%"
             - "%mcfedr_resque.debug%"
+            - "%mcfedr_resque.track_status%"
