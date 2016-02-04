@@ -1,6 +1,7 @@
 <?php
 
 namespace Mcfedr\ResqueBundle\Manager;
+use Mcfedr\ResqueBundle\Resque\Job;
 
 /**
  * Class ResqueManager
@@ -106,11 +107,11 @@ class ResqueManager
         $trackJobStatus = $trackStatus || $this->trackStatus;
 
         if ($when) {
-            \ResqueScheduler::enqueueAt($when, $queue, static::JOB_CLASS, $args, $trackJobStatus);
-            return new JobDescription($when, $queue, static::JOB_CLASS, $args, $trackJobStatus);
+            \ResqueScheduler::enqueueAt($when, $queue, Job::class, $args, $trackJobStatus);
+            return new JobDescription($when, $queue, Job::class, $args, $trackJobStatus);
         } else {
-            $id = \Resque::enqueue($queue, static::JOB_CLASS, $args, $trackJobStatus);
-            return new JobDescription(null, $queue, static::JOB_CLASS, $args, $trackJobStatus, $id);
+            $id = \Resque::enqueue($queue, Job::class, $args, $trackJobStatus);
+            return new JobDescription(null, $queue, Job::class, $args, $trackJobStatus, $id);
         }
     }
 

@@ -13,9 +13,9 @@ services:
             - "%mcfedr_resque.host%"
             - "%mcfedr_resque.port%"
             -
-                'kernel.root_dir': '%kernel.root_dir%'
-                'kernel.environment': '%kernel.environment%'
-                'kernel.debug': '%kernel.debug%'
+                "kernel.root_dir": "%kernel.root_dir%"
+                "kernel.environment": "%kernel.environment%"
+                "kernel.debug": "%kernel.debug%"
             - "%mcfedr_resque.default_queue%"
             - "%mcfedr_resque.prefix%"
             - "%mcfedr_resque.debug%"

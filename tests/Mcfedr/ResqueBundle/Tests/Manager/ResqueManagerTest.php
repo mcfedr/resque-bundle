@@ -15,11 +15,6 @@ class ResqueManagerTest extends \PHPUnit_Framework_TestCase
         $this->manager = new ResqueManager('127.0.0.1', 6379, [], 'default', 'tests:', false, false);
     }
 
-    public function testJobClass()
-    {
-        $this->assertEquals('Mcfedr\ResqueBundle\Resque\Job', ResqueManager::JOB_CLASS);
-    }
-
     /**
      * @dataProvider getValues
      */
@@ -29,6 +24,7 @@ class ResqueManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Mcfedr\ResqueBundle\Manager\JobDescription', $value);
         $this->assertTrue($value->isFutureJob());
         $this->assertNull($value->getId());
+        $this->assertEquals('Mcfedr\ResqueBundle\Resque\Job', $value->getClass());
     }
 
     /**
@@ -40,6 +36,7 @@ class ResqueManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Mcfedr\ResqueBundle\Manager\JobDescription', $value);
         $this->assertFalse($value->isFutureJob());
         $this->assertInternalType('string', $value->getId());
+        $this->assertEquals('Mcfedr\ResqueBundle\Resque\Job', $value->getClass());
     }
 
     public function testRelativeKernel()
