@@ -53,7 +53,7 @@ Your configuration should be something like this
 redis host to separate them completely
 * `default_queue` - Name of queue to use if not specified
 * `debug` - If set to true no calls to Resque will actually be made
-* `trackStatus` - Set to true to enable job tracking for all jobs
+* `track_status` - Set to true to enable job tracking for all jobs
 
 ## Usage
 
