@@ -22,7 +22,7 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->booleanNode('debug')->defaultFalse()->end()
                 ->scalarNode('host')->defaultValue('localhost')->cannotBeEmpty()->end()
-                ->integerNode('port')->min(0)->max(65535)->defaultValue(6379)->end()
+                ->scalarNode('port')->defaultValue(6379)->end()
                 ->scalarNode('default_queue')->defaultValue('default')->cannotBeEmpty()->end()
                 ->scalarNode('prefix')->end()
                 ->booleanNode('track_status')->defaultFalse()->end()
