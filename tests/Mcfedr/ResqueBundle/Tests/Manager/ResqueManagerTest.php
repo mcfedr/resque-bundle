@@ -3,7 +3,6 @@
 namespace Mcfedr\ResqueBundle\Tests\Manager;
 
 use Mcfedr\ResqueBundle\Manager\ResqueManager;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class ResqueManagerTest extends \PHPUnit_Framework_TestCase
 {
@@ -42,7 +41,7 @@ class ResqueManagerTest extends \PHPUnit_Framework_TestCase
     public function testRelativeKernel()
     {
         $this->manager->setKernelOptions([
-            'kernel.root_dir' => __DIR__
+            'kernel.root_dir' => __DIR__,
         ]);
 
         $this->assertEquals('../../../../tests/Mcfedr/ResqueBundle/Tests/Manager/', $this->manager->getKernelOptions()['kernel.root_dir']);
@@ -72,7 +71,7 @@ class ResqueManagerTest extends \PHPUnit_Framework_TestCase
     {
         return [
             ['test', null, null, 'next TUE 11:00'],
-            ['test1', [], null, 'next WED 21:00']
+            ['test1', [], null, 'next WED 21:00'],
         ];
     }
 }

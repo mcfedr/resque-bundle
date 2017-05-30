@@ -1,18 +1,11 @@
 <?php
 
-
 namespace Mcfedr\ResqueBundle\Resque;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-/**
- * Class ResqueJob
- * @package Mcfedr\ResqueBundle\Job
- *
- * This is the job that Resque will run, commands are then run within the symfony container
- */
 class Job
 {
     public $args;
@@ -46,14 +39,14 @@ class Job
     }
 
     /**
-     * This is largely copied from how the test client finds and setups a kernel
+     * This is largely copied from how the test client finds and setups a kernel.
      *
      * @return KernelInterface
      */
     protected function createKernel()
     {
         $finder = new Finder();
-        $finder->name('*Kernel.php')->depth(0)->in(__DIR__ . '/' . $this->args['kernel.root_dir']);
+        $finder->name('*Kernel.php')->depth(0)->in(__DIR__.'/'.$this->args['kernel.root_dir']);
         $results = iterator_to_array($finder);
         $file = current($results);
         $class = $file->getBasename('.php');

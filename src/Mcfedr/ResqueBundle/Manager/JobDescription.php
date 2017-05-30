@@ -2,12 +2,6 @@
 
 namespace Mcfedr\ResqueBundle\Manager;
 
-/**
- * Class JobDescription
- * @package Mcfedr\ResqueBundle\Manager
- *
- * Holds the parameters of a scheduled job
- */
 class JobDescription
 {
     /**
@@ -36,7 +30,7 @@ class JobDescription
     private $args;
 
     /**
-     * @var boolean
+     * @var bool
      */
     private $trackStatus;
 
@@ -83,7 +77,7 @@ class JobDescription
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getTrackStatus()
     {
@@ -100,6 +94,6 @@ class JobDescription
 
     public function isFutureJob()
     {
-        return !!$this->getWhen();
+        return (bool) $this->getWhen();
     }
 }

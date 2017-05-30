@@ -1,15 +1,9 @@
 <?php
 
 namespace Mcfedr\ResqueBundle\Manager;
+
 use Mcfedr\ResqueBundle\Resque\Job;
 
-/**
- * Class ResqueManager
- * @package Mcfedr\ResqueBundle\Manager
- *
- * The main class you will use, puts jobs on the queue
- * Can also delete jobs
- */
 class ResqueManager
 {
     const JOB_CLASS = 'Mcfedr\ResqueBundle\Resque\Job';
@@ -30,17 +24,17 @@ class ResqueManager
     private $debug;
 
     /**
-     * @var boolean
+     * @var bool
      */
     private $trackStatus;
 
     /**
      * @param string $host
-     * @param int $port
-     * @param array $kernelOptions
+     * @param int    $port
+     * @param array  $kernelOptions
      * @param string $defaultQueue
-     * @param bool $debug if debug is true then no calls to Resque will be made
-     * @param boolean $trackStatus Set to true to be able to monitor the status of jobs
+     * @param bool   $debug         if debug is true then no calls to Resque will be made
+     * @param bool   $trackStatus   Set to true to be able to monitor the status of jobs
      */
     public function __construct($host, $port, $kernelOptions, $defaultQueue, $prefix, $debug, $trackStatus)
     {
@@ -66,6 +60,7 @@ class ResqueManager
 
     /**
      * @param array $kernelOptions
+     *
      * @return ResqueManager
      */
     public function setKernelOptions($kernelOptions)
@@ -76,17 +71,19 @@ class ResqueManager
         if (array_key_exists('kernel.root_dir', $this->kernelOptions)) {
             $this->kernelOptions['kernel.root_dir'] = $this->getRelativePath(__DIR__, $this->kernelOptions['kernel.root_dir']);
         }
+
         return $this;
     }
 
     /**
-     * Put a new job on a queue
+     * Put a new job on a queue.
      *
-     * @param string $name The service name of the worker that implements {@link \Mcfedr\ResqueBundle\Worker\WorkerInterface}
-     * @param array $options Options to pass to execute - must be json serializable
-     * @param string $queue Optional queue name, otherwise the default queue will be used
-     * @param \DateTime $when Optionally set a time in the future when this task should happen
-     * @param boolean $trackStatus Set to true to be able to monitor the status of a job
+     * @param string    $name        The service name of the worker that implements {@link \Mcfedr\ResqueBundle\Worker\WorkerInterface}
+     * @param array     $options     Options to pass to execute - must be json serializable
+     * @param string    $queue       Optional queue name, otherwise the default queue will be used
+     * @param \DateTime $when        Optionally set a time in the future when this task should happen
+     * @param bool      $trackStatus Set to true to be able to monitor the status of a job
+     *
      * @return JobDescription
      */
     public function put($name, array $options = null, $queue = null, \DateTime $when = null, $trackStatus = false)
@@ -101,24 +98,27 @@ class ResqueManager
 
         $args = array_merge([
             'name' => $name,
-            'options' => $options
+            'options' => $options,
         ], $this->kernelOptions);
 
         $trackJobStatus = $trackStatus || $this->trackStatus;
 
         if ($when) {
             \ResqueScheduler::enqueueAt($when, $queue, Job::class, $args, $trackJobStatus);
+
             return new JobDescription($when, $queue, Job::class, $args, $trackJobStatus);
         } else {
             $id = \Resque::enqueue($queue, Job::class, $args, $trackJobStatus);
+
             return new JobDescription(null, $queue, Job::class, $args, $trackJobStatus, $id);
         }
     }
 
     /**
-     * Remove a scheduled job
+     * Remove a scheduled job.
      *
      * @param JobDescription $job
+     *
      * @return int number of deleted jobs
      */
     public function delete(JobDescription $job)
@@ -138,33 +138,34 @@ class ResqueManager
     private function getRelativePath($from, $to)
     {
         // some compatibility fixes for Windows paths
-        $from = is_dir($from) ? rtrim($from, '\/') . '/' : $from;
-        $to   = is_dir($to)   ? rtrim($to, '\/') . '/'   : $to;
+        $from = is_dir($from) ? rtrim($from, '\/').'/' : $from;
+        $to = is_dir($to) ? rtrim($to, '\/').'/' : $to;
         $from = str_replace('\\', '/', $from);
-        $to   = str_replace('\\', '/', $to);
+        $to = str_replace('\\', '/', $to);
 
-        $from     = explode('/', $from);
-        $to       = explode('/', $to);
-        $relPath  = $to;
+        $from = explode('/', $from);
+        $to = explode('/', $to);
+        $relPath = $to;
 
-        foreach($from as $depth => $dir) {
+        foreach ($from as $depth => $dir) {
             // find first non-matching dir
-            if($dir === $to[$depth]) {
+            if ($dir === $to[$depth]) {
                 // ignore this directory
                 array_shift($relPath);
             } else {
                 // get number of remaining dirs to $from
                 $remaining = count($from) - $depth;
-                if($remaining > 1) {
+                if ($remaining > 1) {
                     // add traversals up to first matching dir
                     $padLength = (count($relPath) + $remaining - 1) * -1;
                     $relPath = array_pad($relPath, $padLength, '..');
                     break;
                 } else {
-                    $relPath[0] = './' . $relPath[0];
+                    $relPath[0] = './'.$relPath[0];
                 }
             }
         }
+
         return implode('/', $relPath);
     }
 }
